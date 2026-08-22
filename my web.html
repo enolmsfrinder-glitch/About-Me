@@ -10,36 +10,53 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     :root {
-      --bg-main: #0b0f17;
-      --bg-card: #151c28;
-      --bg-card-hover: #1e293b;
-      --accent: #3b82f6;
-      --accent-hover: #2563eb;
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
-      --border: #1f293d;
-      --radius: 12px;
+      /* Modern Pitch Black & Monochrome Theme */
+      --bg-main: #000000;
+      --bg-card: #0a0a0a;
+      --bg-card-hover: #141414;
+      --accent: #ffffff;
+      --accent-hover: #e5e5e5;
+      --text-main: #ffffff;
+      --text-muted: #a1a1aa;
+      --border: #27272a;
+      --radius: 8px;
     }
 
     html {
       scroll-behavior: smooth;
     }
 
+    /* Custom Dark Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-main);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
     body {
       background-color: var(--bg-main);
       color: var(--text-main);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     /* TYPOGRAPHY */
     h1, h2, h3 {
       color: var(--text-main);
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
     }
 
     p {
@@ -51,16 +68,17 @@
       color: inherit;
     }
 
-    /* NAVIGATION */
+    /* NAVIGATION - Enhanced Glassmorphism */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(11, 15, 23, 0.85);
-      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       z-index: 1000;
-      padding: 1rem 5%;
+      padding: 1.2rem 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -70,22 +88,25 @@
       font-size: 1.25rem;
       font-weight: 700;
       color: var(--text-main);
+      letter-spacing: -0.02em;
     }
 
     .logo span {
-      color: var(--accent);
+      color: var(--text-muted);
+      font-weight: 400;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
       list-style: none;
     }
 
     .nav-links a {
       color: var(--text-muted);
-      font-size: 0.95rem;
-      transition: color 0.2s ease;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
     }
 
     .nav-links a:hover {
@@ -94,59 +115,64 @@
 
     /* LAYOUT CONTAINERS */
     section {
-      padding: 6rem 5% 4rem;
+      padding: 8rem 5% 4rem;
       max-width: 1200px;
       margin: 0 auto;
     }
 
+    /* Modern Inverted Button */
     .btn {
       display: inline-block;
-      padding: 0.8rem 1.8rem;
+      padding: 0.9rem 2rem;
       background-color: var(--accent);
-      color: #ffffff;
+      color: #000000;
+      font-size: 0.95rem;
       font-weight: 600;
       border-radius: var(--radius);
-      transition: background-color 0.2s ease, transform 0.2s ease;
-      border: none;
+      transition: all 0.3s ease;
+      border: 1px solid var(--accent);
       cursor: pointer;
     }
 
     .btn:hover {
-      background-color: var(--accent-hover);
-      transform: translateY(-2px);
+      background-color: transparent;
+      color: var(--accent);
     }
 
     /* HERO SECTION */
     .hero {
-      min-height: 90vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      padding-top: 8rem;
+      padding-top: 6rem;
     }
 
     .badge {
       display: inline-block;
-      padding: 0.4rem 1rem;
-      background-color: rgba(59, 130, 246, 0.1);
-      color: var(--accent);
-      border: 1px solid rgba(59, 130, 246, 0.2);
+      padding: 0.4rem 1.2rem;
+      background-color: var(--bg-card);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
       border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     .hero h1 {
-      font-size: 3.5rem;
-      line-height: 1.1;
+      font-size: 4rem;
+      line-height: 1.05;
       margin-bottom: 1.5rem;
+      max-width: 800px;
     }
 
     .hero p {
-      font-size: 1.2rem;
-      max-width: 650px;
+      font-size: 1.15rem;
+      max-width: 600px;
       margin-bottom: 2.5rem;
     }
 
@@ -154,65 +180,70 @@
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      gap: 4rem;
       align-items: center;
-      margin-top: 2rem;
+      margin-top: 3rem;
     }
 
     .stat-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      padding: 2rem;
+      padding: 3rem;
       border-radius: var(--radius);
-      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .stat-number {
-      font-size: 2.5rem;
+      font-size: 3.5rem;
       font-weight: 700;
-      color: var(--accent);
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1;
     }
 
     /* SKILLS SECTION */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1.5rem;
-      margin-top: 2.5rem;
+      margin-top: 3rem;
     }
 
     .skill-card {
       background-color: var(--bg-card);
       border: 1px solid var(--border);
-      padding: 1.8rem;
+      padding: 2.5rem 2rem;
       border-radius: var(--radius);
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      transition: all 0.3s ease;
     }
 
     .skill-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
+      border-color: #555;
+      background-color: var(--bg-card-hover);
     }
 
     .skill-card h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.15rem;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
     }
 
     /* PORTFOLIO SECTION */
     .section-title {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
     }
 
     .section-subtitle {
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
+      font-size: 1.1rem;
     }
 
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
     }
 
     .portfolio-item {
@@ -229,23 +260,25 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
+      transition: transform 0.5s ease;
+      filter: grayscale(20%);
     }
 
     .portfolio-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(11, 15, 23, 0.9), transparent);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 1.5rem;
+      padding: 2rem;
       opacity: 0;
       transition: opacity 0.3s ease;
     }
 
     .portfolio-item:hover img {
       transform: scale(1.05);
+      filter: grayscale(0%);
     }
 
     .portfolio-item:hover .portfolio-overlay {
@@ -253,55 +286,97 @@
     }
 
     .portfolio-overlay h3 {
-      font-size: 1.1rem;
+      font-size: 1.25rem;
+      margin-bottom: 0.3rem;
     }
 
     .portfolio-overlay p {
-      font-size: 0.85rem;
-      color: #d1d5db;
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
 
-    /* LIGHTBOX MODAL */
+    /* ADVANCED LIGHTBOX MODAL */
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
       z-index: 2000;
       justify-content: center;
       align-items: center;
       padding: 2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    .modal img {
+    .modal.show {
+      opacity: 1;
+    }
+
+    .modal-content-wrapper {
+      position: relative;
       max-width: 90%;
-      max-height: 80vh;
+      max-height: 85vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content-wrapper img, .modal-content-wrapper video {
+      max-width: 100%;
+      max-height: 85vh;
       border-radius: var(--radius);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border);
     }
 
     .modal-close {
       position: absolute;
       top: 2rem;
-      right: 2rem;
-      color: #fff;
-      font-size: 2rem;
+      right: 3rem;
+      color: var(--text-muted);
+      font-size: 2.5rem;
       cursor: pointer;
+      transition: color 0.3s ease;
+      z-index: 2001;
+    }
+
+    .modal-close:hover {
+      color: #fff;
+    }
+
+    /* Modal Next Button (Icon Only) */
+    .modal-next {
+      position: absolute;
+      right: -3rem; /* Positions it just outside the image */
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      padding: 1rem;
+    }
+
+    .modal-next:hover {
+      color: #fff;
+      transform: translateY(-50%) scale(1.1);
     }
 
     /* CONTACT SECTION */
     .contact-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      margin-top: 2rem;
+      gap: 4rem;
+      margin-top: 3rem;
     }
 
     form {
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 1.5rem;
     }
 
     .form-group {
@@ -311,28 +386,31 @@
     }
 
     label {
-      font-size: 0.9rem;
-      color: var(--text-main);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     input, textarea {
-      background-color: var(--bg-card);
+      background-color: var(--bg-main);
       border: 1px solid var(--border);
-      padding: 0.9rem;
+      padding: 1rem;
       border-radius: var(--radius);
       color: var(--text-main);
       font-size: 1rem;
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: all 0.3s ease;
     }
 
     input:focus, textarea:focus {
-      border-color: var(--accent);
+      border-color: #555;
+      background-color: var(--bg-card);
     }
 
     textarea {
       resize: vertical;
-      min-height: 120px;
+      min-height: 150px;
     }
 
     .social-links {
@@ -345,31 +423,46 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      padding: 1.2rem;
+      padding: 1.5rem;
       background-color: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      transition: border-color 0.2s ease;
+      transition: all 0.3s ease;
     }
 
     .social-card:hover {
-      border-color: var(--accent);
+      border-color: #555;
+      background-color: var(--bg-card-hover);
+      transform: translateX(5px);
     }
 
-    /* FOOTER */
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 3rem;
       border-top: 1px solid var(--border);
       font-size: 0.85rem;
       color: var(--text-muted);
+      margin-top: 4rem;
+    }
+
+    /* SCROLL REVEAL ANIMATION CLASSES */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* RESPONSIVE DESIGN */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
-      .about-grid, .contact-container { grid-template-columns: 1fr; }
+    @media (max-width: 900px) {
+      .hero h1 { font-size: 3rem; }
+      .about-grid, .contact-container { grid-template-columns: 1fr; gap: 2rem;}
       .nav-links { display: none; }
+      .modal-next { right: 1rem; text-shadow: 0 0 10px rgba(0,0,0,0.8); } /* Bring inside for mobile */
     }
   </style>
 </head>
@@ -377,7 +470,7 @@
 
   <!-- NAVIGATION -->
   <nav>
-    <div class="logo">About<span> Me</span></div>
+    <div class="logo">About<span>Me.</span></div>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
@@ -388,15 +481,15 @@
   </nav>
 
   <!-- HERO SECTION -->
-  <section id="home" class="hero">
+  <section id="home" class="hero reveal">
     <div class="badge">Adaptive AI Specialist</div>
-    <h1>Building Media & Software with Generative Tech</h1>
+    <h1>Building Media & Software with Generative Tech.</h1>
     <p>I design digital AI imagery, produce AI-assisted video workflows, integrate API-driven chatbots, and build applications rapidly using modern Vibe Coding techniques.</p>
     <a href="#portfolio" class="btn">View My Work</a>
   </section>
 
   <!-- ABOUT SECTION -->
-  <section id="about">
+  <section id="about" class="reveal">
     <h2 class="section-title">About Me</h2>
     <p class="section-subtitle">Adapting rapidly to technology to deliver technical solutions.</p>
     <div class="about-grid">
@@ -413,7 +506,7 @@
   </section>
 
   <!-- SKILLS SECTION -->
-  <section id="skills">
+  <section id="skills" class="reveal">
     <h2 class="section-title">Core Capabilities</h2>
     <p class="section-subtitle">What I bring to the table.</p>
     <div class="skills-grid">
@@ -430,48 +523,49 @@
         <p>Building functional AI chatbots and seamlessly linking them to external APIs to automate complex tasks.</p>
       </div>
       <div class="skill-card">
-        <h3>Vibe Coding & Rapid Prototyping</h3>
+        <h3>Vibe Coding & Prototyping</h3>
         <p>Leveraging modern AI-driven coding environments to design, iterate, and deploy web applications rapidly.</p>
       </div>
     </div>
   </section>
 
   <!-- PORTFOLIO SECTION -->
-  <section id="portfolio">
+  <section id="portfolio" class="reveal">
     <h2 class="section-title">Featured Work</h2>
-    <p class="section-subtitle">Click any project to view high resolution preview.</p>
+    <p class="section-subtitle">Click any project to view expanded media.</p>
     <div class="portfolio-grid">
       
-      <!-- Project Item 1 -->
-      <div class="portfolio-item" onclick="openModal('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80')">
-        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Generative Design Asset">
+      <!-- Project Item 1: Digital Design (Images 5, 6, 8) -->
+      <div class="portfolio-item" onclick='openModal(["1000005201.png", "1000005196.png", "1000005178.png"])'>
+        <img src="1000005201.png" alt="Generative Design Asset">
         <div class="portfolio-overlay">
           <h3>AI Digital Design Asset</h3>
           <p>Generative Media Design</p>
         </div>
       </div>
 
-      <!-- Project Item 2 -->
-      <div class="portfolio-item" onclick="openModal('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80')">
-        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80" alt="API Integration Concept">
+      <!-- Project Item 2: API Chatbot (Images 1, 2) -->
+      <div class="portfolio-item" onclick='openModal(["1000006178.jpg", "1000006176.jpg"])'>
+        <img src="1000006178.jpg" alt="API Integration Concept">
         <div class="portfolio-overlay">
           <h3>API Connected Chatbot Concept</h3>
           <p>AI Integration & Logic</p>
         </div>
       </div>
 
-      <!-- Project Item 3 -->
-      <div class="portfolio-item" onclick="openModal('https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80')">
-        <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=600&q=80" alt="AI Video Production Framework">
+      <!-- Project Item 3: Videos (Videos 7, 9) -->
+      <!-- Note: For the preview thumbnail, we use a placeholder or image name. Assuming video7_thumb.jpg exists, or change to a valid img -->
+      <div class="portfolio-item" onclick='openModal(["video7.mp4", "video9.mp4"])'>
+        <img src="1000006174.jpg" alt="AI Video Production Framework">
         <div class="portfolio-overlay">
           <h3>AI Commercial Video Workflow</h3>
           <p>Digital Media Production</p>
         </div>
       </div>
 
-      <!-- Project Item 4 -->
-      <div class="portfolio-item" onclick="openModal('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80')">
-        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="Vibe Coding Prototype">
+      <!-- Project Item 4: Rapid Prototype (Pictures 3, 10) -->
+      <div class="portfolio-item" onclick='openModal(["picture3.jpg", "picture10.jpg"])'>
+        <img src="picture3.jpg" alt="Vibe Coding Prototype" onerror="this.src='1000006173.jpg'"> 
         <div class="portfolio-overlay">
           <h3>Rapid Prototype Interface</h3>
           <p>Vibe Coding & Frontend</p>
@@ -481,19 +575,23 @@
     </div>
   </section>
 
-  <!-- LIGHTBOX MODAL -->
-  <div id="modal" class="modal" onclick="closeModal()">
-    <span class="modal-close">&times;</span>
-    <img id="modal-img" src="" alt="Expanded View">
+  <!-- ENHANCED MULTI-MEDIA LIGHTBOX MODAL -->
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <span class="modal-close" onclick="closeModal(event)">&times;</span>
+    <div class="modal-content-wrapper" id="modal-wrapper">
+      <!-- Media content injected here by JS -->
+      <div id="media-container"></div>
+      <!-- Next Button Icon (HTML Entity for sleek arrow) -->
+      <span class="modal-next" onclick="nextMedia(event)">&#10095;</span>
+    </div>
   </div>
 
   <!-- CONTACT SECTION -->
-  <section id="contact">
+  <section id="contact" class="reveal">
     <h2 class="section-title">Get in Touch</h2>
     <p class="section-subtitle">Send a direct message or connect on social media.</p>
     <div class="contact-container">
       
-      <!-- Email Message Form -->
       <form onsubmit="handleSubmit(event)">
         <div class="form-group">
           <label for="name">Name</label>
@@ -510,9 +608,8 @@
         <button type="submit" class="btn">Send Message</button>
       </form>
 
-      <!-- Social Links -->
       <div class="social-links">
-        <a href="https://linkedin.com" target="_blank" class="social-card">
+        <a href="https://www.linkedin.com/in/ron-empaci-705b703b4" target="_blank" class="social-card">
           <div>
             <h3>LinkedIn</h3>
             <p>Connect professionally</p>
@@ -520,7 +617,7 @@
         </a>
         <a href="https://github.com" target="_blank" class="social-card">
           <div>
-            <h3>GitHub / Socials</h3>
+            <h3>GitHub</h3>
             <p>Explore code & tech builds</p>
           </div>
         </a>
@@ -531,27 +628,88 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2026 Developer Portfolio. Built with HTML & CSS.</p>
+    <p>&copy; 2026 Developer Portfolio. Built with Modern HTML, CSS & JS.</p>
   </footer>
 
   <!-- JAVASCRIPT -->
   <script>
-    // Lightbox modal logic
-    function openModal(imageSrc) {
+    /* --- MULTI-MEDIA MODAL LOGIC --- */
+    let currentMediaArray = [];
+    let currentMediaIndex = 0;
+
+    function openModal(mediaArray) {
+      currentMediaArray = mediaArray;
+      currentMediaIndex = 0;
+      
       const modal = document.getElementById('modal');
-      const modalImg = document.getElementById('modal-img');
-      modalImg.src = imageSrc;
       modal.style.display = 'flex';
+      
+      // Small timeout to allow display:flex to apply before adding opacity class for animation
+      setTimeout(() => {
+        modal.classList.add('show');
+      }, 10);
+      
+      renderMedia();
     }
 
-    function closeModal() {
-      document.getElementById('modal').style.display = 'none';
+    function renderMedia() {
+      const container = document.getElementById('media-container');
+      const file = currentMediaArray[currentMediaIndex];
+      
+      // Check if file is a video by extension
+      if (file.toLowerCase().endsWith('.mp4') || file.toLowerCase().endsWith('.webm')) {
+        container.innerHTML = `
+          <video controls autoplay loop muted style="max-width:100%; max-height:85vh; border-radius:8px;">
+            <source src="${file}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>`;
+      } else {
+        // Otherwise treat as image
+        container.innerHTML = `<img src="${file}" alt="Expanded View">`;
+      }
     }
 
-    // Form submission handle
+    function nextMedia(event) {
+      event.stopPropagation(); // Prevents the click from bubbling up to the modal background (which would close it)
+      currentMediaIndex = (currentMediaIndex + 1) % currentMediaArray.length;
+      renderMedia();
+    }
+
+    function closeModal(event) {
+      // Only close if clicking the background overlay or the exact close button
+      if (event.target.id === 'modal' || event.target.className === 'modal-close') {
+        const modal = document.getElementById('modal');
+        modal.classList.remove('show');
+        
+        // Wait for fade out animation before hiding
+        setTimeout(() => {
+          modal.style.display = 'none';
+          document.getElementById('media-container').innerHTML = ''; // Stop videos from playing when closed
+        }, 300);
+      }
+    }
+
+    /* --- SCROLL REVEAL ANIMATIONS --- */
+    function reveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 100;
+
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add('active');
+        }
+      }
+    }
+    
+    window.addEventListener('scroll', reveal);
+    reveal(); // Trigger on load
+
+    /* --- FORM SUBMISSION --- */
     function handleSubmit(e) {
       e.preventDefault();
-      alert('Thank you for your message! This form can be linked to a backend service like Formspree or EmailJS.');
+      alert('Message interface triggered! Link this to a backend service like Formspree.');
       e.target.reset();
     }
   </script>
