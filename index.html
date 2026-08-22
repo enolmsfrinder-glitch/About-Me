@@ -535,42 +535,43 @@
     <p class="section-subtitle">Click any project to view expanded media.</p>
     <div class="portfolio-grid">
       
-      <!-- Project Item 1: Digital Design (Images 5, 6, 8) -->
-      <div class="portfolio-item" onclick='openModal(["1000005201.png", "1000005196.png", "1000005178.png"])'>
-        <img src="1000005201.png" alt="Generative Design Asset">
-        <div class="portfolio-overlay">
-          <h3>AI Digital Design Asset</h3>
-          <p>Generative Media Design</p>
-        </div>
-      </div>
+     <!-- Project Item 1: Digital Design -->
+  <div class="portfolio-item" onclick='openModal(["1783679861331.png", "1783678867684.png", "1783669859616.png"])'>
+    <img src="1783679861331.png" alt="Generative Design Asset">
+    <div class="portfolio-overlay">
+      <h3>AI Digital Design Asset</h3>
+      <p>Generative Media Design</p>
+    </div>
+  </div>
 
-      <!-- Project Item 2: API Chatbot (Images 1, 2) -->
-      <div class="portfolio-item" onclick='openModal(["1000006178.jpg", "1000006176.jpg"])'>
-        <img src="1000006178.jpg" alt="API Integration Concept">
-        <div class="portfolio-overlay">
-          <h3>API Connected Chatbot Concept</h3>
-          <p>AI Integration & Logic</p>
-        </div>
-      </div>
+       <!-- Project Item 2: API Chatbot -->
+  <div class="portfolio-item" onclick='openModal(["1000006178.jpg", "1000006176.jpg"])'>
+    <img src="1000006178.jpg" alt="API Integration Concept">
+    <div class="portfolio-overlay">
+      <h3>API Connected Chatbot Concept</h3>
+      <p>AI Integration & Logic</p>
+    </div>
+  </div>
 
-      <!-- Project Item 3: Videos (Videos 7, 9) -->
-      <!-- Note: For the preview thumbnail, we use a placeholder or image name. Assuming video7_thumb.jpg exists, or change to a valid img -->
-      <div class="portfolio-item" onclick='openModal(["video7.mp4", "video9.mp4"])'>
-        <img src="1000006174.jpg" alt="AI Video Production Framework">
-        <div class="portfolio-overlay">
-          <h3>AI Commercial Video Workflow</h3>
-          <p>Digital Media Production</p>
-        </div>
-      </div>
+      <!-- Project Item 3: Videos (Using video7.mp4 as a live video preview) -->
+  <div class="portfolio-item" onclick='openModal(["video7.mp4", "video9.mp4"])'>
+    <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+      <source src="video7.mp4" type="video/mp4">
+    </video>
+    <div class="portfolio-overlay">
+      <h3>AI Commercial Video Workflow</h3>
+      <p>Digital Media Production</p>
+    </div>
+  </div>
 
-      <!-- Project Item 4: Rapid Prototype (Pictures 3, 10) -->
-      <div class="portfolio-item" onclick='openModal(["picture3.jpg", "picture10.jpg"])'>
-        <img src="picture3.jpg" alt="Vibe Coding Prototype" onerror="this.src='1000006173.jpg'"> 
-        <div class="portfolio-overlay">
-          <h3>Rapid Prototype Interface</h3>
-          <p>Vibe Coding & Frontend</p>
-        </div>
-      </div>
+  <!-- Project Item 4: Rapid Prototype -->
+  <div class="portfolio-item" onclick='openModal(["picture3.jpg", "1000006176.jpg"])'>
+    <img src="picture3.jpg" alt="Vibe Coding Prototype"> 
+    <div class="portfolio-overlay">
+      <h3>Rapid Prototype Interface</h3>
+      <p>Vibe Coding & Frontend</p>
+    </div>
+  </div>
 
     </div>
   </section>
