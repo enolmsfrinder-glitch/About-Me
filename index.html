@@ -1,635 +1,932 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Specialist & Developer</title>
-  <style>
-    /* CSS RESET & VARIABLES */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leo Davinci — AI Specialist & Developer</title>
+<meta name="description" content="AI specialist building media and software with generative tech — AI imagery, video workflows, chatbot integrations, and rapid prototyping.">
 
-    :root {
-      var(--bg-main): #000000;
-      var(--bg-card): #0a0a0a;
-      var(--bg-card-hover): #141414;
-      --accent: #ffffff;
-      --accent-hover: #e5e5e5;
-      --text-main: #ffffff;
-      --text-muted: #a1a1aa;
-      --border: #27272a;
-      --radius: 8px;
-    }
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --bg-main:#000;
+  --bg-card:#0a0a0a;
+  --bg-card-hover:#141414;
+  --accent:#fff;
+  --accent-hover:#e5e5e5;
+  --text-main:#fff;
+  --text-muted:#a1a1aa;
+  --text-dim:#52525b;
+  --border:#1f1f22;
+  --border-strong:#333;
+  --radius:10px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --nav-h:76px;
+}
 
-    /* Lock body scrolling for the app-like feel */
-    body {
-      background-color: #000000;
-      color: var(--text-main);
-      line-height: 1.6;
-      overflow: hidden; /* Prevents whole-page scrolling */
-      height: 100vh;
-    }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
 
-    /* Custom Dark Scrollbar for internal sections */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #000000; }
-    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #555; }
+body{
+  background:var(--bg-main);
+  color:var(--text-main);
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6;
+  overflow:hidden;
+  height:100vh;
+  height:100dvh;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
 
-    /* TYPOGRAPHY */
-    h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; }
-    p { color: var(--text-muted); }
-    a { text-decoration: none; color: inherit; cursor: pointer; }
+/* Scrollbar */
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:#000}
+::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:#444}
+*{scrollbar-width:thin;scrollbar-color:#2a2a2a #000}
 
-    /* NAVIGATION */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-      padding: 1.2rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+/* Focus */
+:focus{outline:none}
+:focus-visible{
+  outline:1.5px solid var(--accent);
+  outline-offset:3px;
+  border-radius:4px;
+}
 
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-main);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 1001; /* Keep above mobile menu */
-    }
+/* Typography */
+h1,h2,h3{font-weight:700;letter-spacing:-.03em;line-height:1.15}
+p{color:var(--text-muted)}
+a{text-decoration:none;color:inherit;cursor:pointer}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
+/* ============================================================
+   NAV
+   ============================================================ */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  height:var(--nav-h);
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  border-bottom:1px solid var(--border);
+  z-index:1000;
+  padding:0 5%;
+  display:flex;justify-content:space-between;align-items:center;
+}
 
-    .nav-links a {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      transition: color 0.3s ease;
-    }
+.logo{
+  font-size:1rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  position:relative;z-index:1001;
+  transition:opacity .25s ease;
+}
+.logo:hover{opacity:.75}
 
-    .nav-links a:hover, .nav-links a.active-link {
-      color: var(--accent);
-    }
+.nav-links{
+  display:flex;gap:2.4rem;list-style:none;
+}
 
-    /* HAMBURGER ICON (Hidden on Desktop) */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      z-index: 1001; /* Keep above mobile menu */
-    }
+.nav-links a{
+  color:var(--text-muted);
+  font-size:.78rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  transition:color .25s ease;
+  position:relative;
+  padding:4px 0;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;right:0;bottom:-2px;height:1px;
+  background:var(--accent);
+  transform:scaleX(0);transform-origin:right;
+  transition:transform .4s var(--ease);
+}
+.nav-links a:hover,.nav-links a.active-link{color:var(--accent)}
+.nav-links a:hover::after,.nav-links a.active-link::after{
+  transform:scaleX(1);transform-origin:left;
+}
 
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background-color: var(--text-main);
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
+/* Hamburger */
+.hamburger{
+  display:none;
+  flex-direction:column;gap:5px;
+  padding:8px;cursor:pointer;
+  z-index:1001;
+  border-radius:6px;
+}
+.hamburger span{
+  display:block;width:24px;height:2px;
+  background:var(--text-main);border-radius:2px;
+  transition:transform .3s var(--ease),opacity .3s ease;
+}
+.hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-    /* PAGE SECTIONS (The Tab Switching Logic) */
-    .page-section {
-      display: none; /* Hidden by default */
-      height: 100vh;
-      padding: 7rem 5% 4rem;
-      overflow-y: auto; /* Allow scrolling inside the tab if content is long */
-      max-width: 1200px;
-      margin: 0 auto;
-      animation: fadeIn 0.4s ease-out;
-    }
+/* ============================================================
+   PAGE SECTIONS
+   ============================================================ */
+.page-section{
+  display:none;
+  height:100vh;height:100dvh;
+  padding:calc(var(--nav-h) + 3rem) 5% 4rem;
+  overflow-y:auto;
+  overflow-x:hidden;
+  max-width:1200px;
+  margin:0 auto;
+}
+.page-section.active-section{
+  display:block;
+  animation:sectionIn .5s var(--ease);
+}
+@keyframes sectionIn{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:none}
+}
 
-    .active-section {
-      display: block; /* Show active tab */
-    }
+.page-section.active-section > *{
+  animation:stagger .6s var(--ease) backwards;
+}
+.page-section.active-section > *:nth-child(2){animation-delay:.05s}
+.page-section.active-section > *:nth-child(3){animation-delay:.1s}
+.page-section.active-section > *:nth-child(4){animation-delay:.15s}
+@keyframes stagger{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:none}
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:1rem 2.2rem;
+  background:var(--accent);color:#000;
+  font-size:.9rem;font-weight:600;
+  letter-spacing:.02em;
+  border-radius:var(--radius);
+  border:1px solid var(--accent);
+  transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease);
+}
+.btn:hover{background:transparent;color:var(--accent);transform:translateY(-1px)}
+.btn::after{content:'→';transition:transform .3s var(--ease)}
+.btn:hover::after{transform:translateX(4px)}
 
-    /* BUTTONS */
-    .btn {
-      display: inline-block;
-      padding: 0.9rem 2rem;
-      background-color: var(--accent);
-      color: #000000;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border-radius: var(--radius);
-      transition: all 0.3s ease;
-      border: 1px solid var(--accent);
-      cursor: pointer;
-    }
-    .btn:hover { background-color: transparent; color: var(--accent); }
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero-layout{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:5rem;align-items:center;
+  min-height:calc(100dvh - var(--nav-h) - 7rem);
+}
 
-    /* HERO SECTION (Text + Picture + Tesseract) */
-    .hero-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      min-height: 80vh;
-    }
+.badge{
+  display:inline-block;
+  padding:.45rem 1.2rem;
+  background:var(--bg-card);color:var(--text-muted);
+  border:1px solid var(--border);
+  border-radius:50px;
+  font-size:.72rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:2rem;
+}
 
-    .badge {
-      display: inline-block;
-      padding: 0.4rem 1.2rem;
-      background-color: #0a0a0a;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
+.hero-text h1{
+  font-size:clamp(2.4rem,5.2vw,4.5rem);
+  margin-bottom:1.5rem;
+}
+.hero-text h1 em{
+  font-style:normal;
+  background:linear-gradient(120deg,#fff 30%,#777 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
-    .hero-text h1 {
-      font-size: 3.5rem;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
+.hero-text p{
+  font-size:1.05rem;
+  margin-bottom:2.5rem;
+  max-width:52ch;
+}
 
-    .hero-text p {
-      font-size: 1.1rem;
-      margin-bottom: 2.5rem;
-      max-width: 90%;
-    }
+/* Visuals */
+.hero-visuals{
+  display:flex;flex-direction:column;
+  align-items:center;gap:3rem;
+}
 
-    /* PROFILE & TESSERACT VISUALS */
-    .hero-visuals {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3rem;
-    }
+.profile-image-container{
+  width:min(250px,60vw);aspect-ratio:1;
+  border-radius:50%;
+  border:1px solid var(--border);
+  padding:8px;
+  position:relative;
+  transition:transform .5s var(--ease);
+}
+.profile-image-container::before{
+  content:'';position:absolute;inset:-1px;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent,rgba(255,255,255,.35),transparent 40%);
+  animation:spin 8s linear infinite;
+  opacity:.6;
+}
+.profile-image-container:hover{transform:scale(1.03)}
+.profile-image-container img{
+  width:100%;height:100%;object-fit:cover;
+  border-radius:50%;
+  filter:grayscale(15%) contrast(1.05);
+  background:#111;
+  position:relative;z-index:1;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-    .profile-image-container {
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      padding: 8px;
-      position: relative;
-    }
-    
-    .profile-image-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      filter: grayscale(20%);
-    }
+/* Tesseract */
+.tesseract-scene{
+  width:120px;height:120px;
+  perspective:600px;
+}
+.tesseract{
+  width:100%;height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  animation:rotateTesseract 14s infinite linear;
+}
+.cube{
+  position:absolute;width:100%;height:100%;
+  transform-style:preserve-3d;
+}
+.cube.inner{
+  transform:scale3d(.5,.5,.5);
+  animation:counterRotate 14s infinite linear;
+}
+.face{
+  position:absolute;width:100%;height:100%;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.02);
+  box-shadow:inset 0 0 14px rgba(255,255,255,.08);
+}
+.front {transform:translateZ(60px)}
+.back  {transform:rotateY(180deg) translateZ(60px)}
+.right {transform:rotateY(90deg)  translateZ(60px)}
+.left  {transform:rotateY(-90deg) translateZ(60px)}
+.top   {transform:rotateX(90deg)  translateZ(60px)}
+.bottom{transform:rotateX(-90deg) translateZ(60px)}
 
-    /* PURE CSS TESSERACT LOGO */
-    .tesseract-scene {
-      width: 120px;
-      height: 120px;
-      perspective: 600px;
-    }
-    .tesseract {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      animation: rotateTesseract 12s infinite linear;
-    }
-    .cube {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-    }
-    .cube.inner { transform: scale3d(0.5, 0.5, 0.5); }
-    .face {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      background: rgba(255, 255, 255, 0.02);
-      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
-    }
-    .front  { transform: translateZ(60px); }
-    .back   { transform: rotateY(180deg) translateZ(60px); }
-    .right  { transform: rotateY(90deg) translateZ(60px); }
-    .left   { transform: rotateY(-90deg) translateZ(60px); }
-    .top    { transform: rotateX(90deg) translateZ(60px); }
-    .bottom { transform: rotateX(-90deg) translateZ(60px); }
+@keyframes rotateTesseract{
+  0%  {transform:rotateX(0)   rotateY(0)   rotateZ(0)}
+  100%{transform:rotateX(360deg) rotateY(360deg) rotateZ(360deg)}
+}
+@keyframes counterRotate{
+  0%  {transform:scale3d(.5,.5,.5) rotateX(0)   rotateY(0)   rotateZ(0)}
+  100%{transform:scale3d(.5,.5,.5) rotateX(-360deg) rotateY(-360deg) rotateZ(-360deg)}
+}
 
-    @keyframes rotateTesseract {
-      0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-      100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
-    }
+/* ============================================================
+   SECTION HEADS
+   ============================================================ */
+.section-title{font-size:clamp(1.8rem,4vw,3rem);margin-bottom:.5rem}
+.section-subtitle{margin-bottom:3rem;font-size:1.05rem;max-width:60ch}
 
-    /* ABOUT SECTION */
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
-    .stat-card { background: #0a0a0a; border: 1px solid var(--border); padding: 3rem; border-radius: var(--radius); }
-    .stat-number { font-size: 3.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem; }
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about-grid{
+  display:grid;grid-template-columns:1.2fr .8fr;
+  gap:4rem;align-items:start;
+  margin-top:2rem;
+}
+.about-grid p + p{margin-top:1rem}
 
-    /* SKILLS SECTION */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
+.stat-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  padding:2.5rem;
+  border-radius:var(--radius);
+  position:relative;overflow:hidden;
+  transition:border-color .35s var(--ease),transform .35s var(--ease);
+}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#fff,transparent);
+  opacity:.5;
+}
+.stat-card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+.stat-number{
+  font-size:clamp(2.4rem,5vw,3.5rem);
+  font-weight:700;letter-spacing:-.04em;
+  margin-bottom:.5rem;color:var(--text-main);
+}
 
-    .skill-card {
-      background-color: #0a0a0a;
-      border: 1px solid var(--border);
-      padding: 2rem;
-      border-radius: var(--radius);
-      transition: all 0.3s ease;
-    }
+/* ============================================================
+   SKILLS
+   ============================================================ */
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1.25rem;
+  margin-top:2rem;
+}
+.skill-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  padding:2.25rem 2rem;
+  border-radius:var(--radius);
+  transition:border-color .35s var(--ease),background .35s var(--ease),transform .35s var(--ease);
+  position:relative;overflow:hidden;
+}
+.skill-card::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at top right,rgba(255,255,255,.06),transparent 60%);
+  opacity:0;transition:opacity .4s ease;
+  pointer-events:none;
+}
+.skill-card:hover{
+  border-color:var(--border-strong);
+  background:var(--bg-card-hover);
+  transform:translateY(-3px);
+}
+.skill-card:hover::after{opacity:1}
+.skill-card h3{margin-bottom:.85rem;font-size:1.15rem}
+.skill-card p{font-size:.92rem}
 
-    .skill-card:hover { border-color: #555; background-color: #141414; }
-    .skill-card h3 { margin-bottom: 1rem; font-size: 1.2rem; }
+/* ============================================================
+   PORTFOLIO
+   ============================================================ */
+.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:1.5rem;
+  margin-top:1rem;
+}
+.portfolio-item{
+  position:relative;
+  background:var(--bg-card);
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--border);
+  cursor:pointer;
+  aspect-ratio:16/10;
+  transition:border-color .35s var(--ease),transform .45s var(--ease);
+}
+.portfolio-item:focus-visible{border-color:var(--accent)}
+.portfolio-item:hover{transform:translateY(-4px);border-color:var(--border-strong)}
 
-    /* PORTFOLIO SECTION */
-    .section-title { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    .section-subtitle { margin-bottom: 3rem; font-size: 1.1rem; }
-    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem; }
-    
-    .portfolio-item {
-      position: relative;
-      background-color: #0a0a0a;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      aspect-ratio: 16 / 10;
-    }
-    .portfolio-item img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.5s ease; filter: grayscale(20%);
-    }
-    .portfolio-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
-      display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem;
-      opacity: 0; transition: opacity 0.3s ease;
-    }
-    .portfolio-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
-    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
-    .portfolio-overlay h3 { font-size: 1.25rem; margin-bottom: 0.3rem; }
+.portfolio-item img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .7s var(--ease),filter .5s var(--ease);
+  filter:grayscale(25%) contrast(1.03);
+  background:#0d0d0d;
+}
+.portfolio-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.96) 0%,rgba(0,0,0,.4) 55%,transparent 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.75rem;
+  opacity:0;
+  transition:opacity .35s var(--ease);
+}
+.portfolio-overlay h3{font-size:1.2rem;margin-bottom:.25rem}
+.portfolio-overlay p{font-size:.85rem;color:#d4d4d8}
 
-    /* MODAL */
-    .modal {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px);
-      z-index: 2000; justify-content: center; align-items: center; padding: 2rem;
-      opacity: 0; transition: opacity 0.3s ease;
-    }
-    .modal.show { opacity: 1; }
-    .modal-content-wrapper { position: relative; max-width: 90%; max-height: 85vh; display: flex; justify-content: center; align-items: center; }
-    .modal-content-wrapper img, .modal-content-wrapper video { max-width: 100%; max-height: 85vh; border-radius: var(--radius); border: 1px solid var(--border); }
-    .modal-close { position: absolute; top: 2rem; right: 3rem; color: var(--text-muted); font-size: 2.5rem; cursor: pointer; z-index: 2001; }
-    .modal-close:hover { color: #fff; }
-    .modal-next { position: absolute; right: -3rem; top: 50%; transform: translateY(-50%); font-size: 2.5rem; color: var(--text-muted); cursor: pointer; padding: 1rem; }
-    .modal-next:hover { color: #fff; transform: translateY(-50%) scale(1.1); }
+.portfolio-item:hover img,
+.portfolio-item:focus-visible img{
+  transform:scale(1.06);
+  filter:grayscale(0%) contrast(1.05);
+}
+.portfolio-item:hover .portfolio-overlay,
+.portfolio-item:focus-visible .portfolio-overlay{opacity:1}
 
-    /* CONTACT SECTION */
-    .contact-container {
-      display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 3rem; max-width: 600px;
-    }
-    .social-card {
-      display: flex; align-items: center; gap: 1rem; padding: 1.5rem;
-      background-color: #0a0a0a; border: 1px solid var(--border); border-radius: var(--radius);
-      transition: all 0.3s ease; cursor: pointer;
-    }
-    .social-card:hover { border-color: var(--accent); background-color: #141414; transform: translateX(5px); }
-    
-    .primary-contact { border-color: #555; background: #111; }
-    .primary-contact h3 { color: var(--accent); font-size: 1.4rem; }
+/* Touch devices: always show overlay */
+@media (hover:none){
+  .portfolio-overlay{opacity:1}
+  .portfolio-item img{filter:grayscale(0%)}
+  .portfolio-item:hover{transform:none}
+}
 
-    /* RESPONSIVE & DESKTOP ENHANCEMENTS */
-    @media (min-width: 901px) {
-      .skill-card { padding: 3rem 2.5rem; }
-      .skill-card h3 { font-size: 1.5rem; }
-      .section-title { font-size: 3.2rem; }
-      .hero-text h1 { font-size: 4.5rem; }
-    }
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-container{
+  display:grid;grid-template-columns:1fr;
+  gap:1rem;margin-top:2rem;max-width:620px;
+}
+.social-card{
+  display:flex;align-items:center;
+  padding:1.5rem 1.75rem;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  transition:border-color .3s var(--ease),background .3s var(--ease),transform .3s var(--ease);
+}
+.social-card:hover{
+  border-color:var(--border-strong);
+  background:var(--bg-card-hover);
+  transform:translateX(5px);
+}
+.social-card h3{font-size:1.05rem;margin-bottom:.15rem}
+.social-card p{font-size:.88rem}
+.primary-contact{
+  border-color:var(--border-strong);
+  background:linear-gradient(135deg,#111,#0a0a0a);
+}
+.primary-contact h3{color:var(--accent)}
 
-    @media (max-width: 900px) {
-      .hero-layout { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
-      .hero-text p { margin: 0 auto 2rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .modal-next { right: 1rem; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
-      
-      /* --- MOBILE NAVIGATION FIX --- */
-      .hamburger { 
-        display: flex; /* Reveal hamburger icon */
-      } 
-      
-      .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%; /* Hides the menu off-screen to the right by default */
-        width: 100%;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.98);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transition: right 0.4s ease;
-        z-index: 1000;
-      }
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.95);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  z-index:2000;
+  display:none;
+  justify-content:center;align-items:center;
+  padding:2rem;
+  opacity:0;
+  transition:opacity .3s var(--ease);
+}
+.modal.show{opacity:1}
+.modal-content-wrapper{
+  position:relative;
+  max-width:90vw;max-height:85vh;
+  display:flex;justify-content:center;align-items:center;
+}
+.modal-content-wrapper img,
+.modal-content-wrapper video{
+  max-width:100%;max-height:85vh;
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  display:block;
+}
+.modal-close{
+  position:absolute;top:1.75rem;right:2rem;
+  width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;line-height:1;
+  color:var(--text-muted);
+  border-radius:50%;
+  transition:color .25s ease,background .25s ease,transform .25s ease;
+  z-index:2001;
+}
+.modal-close:hover{color:#fff;background:rgba(255,255,255,.08);transform:rotate(90deg)}
 
-      .nav-links.nav-active {
-        right: 0; /* Slides the menu in */
-      }
+.modal-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:52px;height:52px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;color:var(--text-muted);
+  border-radius:50%;
+  background:rgba(0,0,0,.55);
+  border:1px solid var(--border);
+  transition:color .25s ease,background .25s ease,transform .25s ease;
+  z-index:2001;
+}
+.modal-nav:hover{color:#fff;background:rgba(0,0,0,.85);transform:translateY(-50%) scale(1.06)}
+.modal-prev{left:-72px}
+.modal-next{right:-72px}
 
-      .nav-links li {
-        margin: 1.5rem 0;
-      }
-      
-      .nav-links a {
-        font-size: 1.5rem; /* Larger tap targets on mobile */
-      }
+.modal-counter{
+  position:absolute;bottom:1.5rem;left:50%;
+  transform:translateX(-50%);
+  font-size:.78rem;letter-spacing:.16em;
+  color:var(--text-muted);
+  background:rgba(0,0,0,.6);
+  padding:.4rem .9rem;border-radius:50px;
+  border:1px solid var(--border);
+}
 
-      /* Hamburger 'X' Animation */
-      .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-      .hamburger.active span:nth-child(2) { opacity: 0; }
-      .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-    }
-  </style>
+/* Hide nav buttons when only one item */
+.modal.single .modal-nav{display:none}
+.modal.single .modal-counter{display:none}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1024px){
+  .modal-prev{left:0.5rem}
+  .modal-next{right:0.5rem}
+}
+
+@media (max-width:900px){
+  .hero-layout{grid-template-columns:1fr;text-align:center;gap:2.5rem}
+  .hero-text p{margin-left:auto;margin-right:auto}
+  .hero-visuals{order:-1}
+  .about-grid{grid-template-columns:1fr;gap:2rem}
+
+  .hamburger{display:flex}
+
+  .nav-links{
+    position:fixed;
+    top:0;right:0;
+    width:100%;height:100vh;height:100dvh;
+    background:rgba(0,0,0,.98);
+    flex-direction:column;justify-content:center;align-items:center;
+    gap:2rem;
+    transform:translateX(100%);
+    transition:transform .4s var(--ease);
+    z-index:1000;
+    visibility:hidden;
+  }
+  .nav-links.nav-active{
+    transform:translateX(0);
+    visibility:visible;
+  }
+  .nav-links a{font-size:1.4rem}
+
+  body.menu-open{overflow:hidden}
+}
+
+@media (min-width:901px){
+  .skill-card{padding:2.75rem 2.5rem}
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+</style>
 </head>
 <body>
 
-  <!-- NAVIGATION -->
-  <nav>
-    <div class="logo" onclick="switchTab('home')">ABOUT ME</div>
-    
-    <!-- Hamburger Icon Added Here -->
-    <div class="hamburger" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
+<!-- ================= NAV ================= -->
+<nav>
+  <button class="logo" data-target="home" aria-label="Go to home">ABOUT ME</button>
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-links" id="nav-menu">
+    <li><a data-target="home"      class="nav-link active-link">Home</a></li>
+    <li><a data-target="about"     class="nav-link">About</a></li>
+    <li><a data-target="skills"    class="nav-link">Skills</a></li>
+    <li><a data-target="portfolio" class="nav-link">Work</a></li>
+    <li><a data-target="contact"   class="nav-link">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ================= HOME ================= -->
+<section id="home" class="page-section active-section">
+  <div class="hero-layout">
+    <div class="hero-text">
+      <div class="badge">Adaptive AI Specialist</div>
+      <h1>Building <em>Media &amp; Software</em> with Generative Tech.</h1>
+      <p>I design digital AI imagery, produce AI-assisted video workflows, integrate API-driven chatbots, and build applications rapidly using modern vibe-coding techniques.</p>
+      <button class="btn" data-target="portfolio">View My Work</button>
     </div>
 
-    <ul class="nav-links">
-      <li><a onclick="switchTab('home')" class="nav-link active-link" data-target="home">Home</a></li>
-      <li><a onclick="switchTab('about')" class="nav-link" data-target="about">About</a></li>
-      <li><a onclick="switchTab('skills')" class="nav-link" data-target="skills">Skills</a></li>
-      <li><a onclick="switchTab('portfolio')" class="nav-link" data-target="portfolio">Work</a></li>
-      <li><a onclick="switchTab('contact')" class="nav-link" data-target="contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- HOME / HERO SECTION -->
-  <section id="home" class="page-section active-section">
-    <div class="hero-layout">
-      <div class="hero-text">
-        <div class="badge">Adaptive AI Specialist</div>
-        <h1>Building Media & Software with Generative Tech.</h1>
-        <p>I design digital AI imagery, produce AI-assisted video workflows, integrate API-driven chatbots, and build applications rapidly using modern Vibe Coding techniques.</p>
-        <button onclick="switchTab('portfolio')" class="btn">View My Work</button>
+    <div class="hero-visuals">
+      <div class="profile-image-container">
+        <img src="1000006190.jpg" alt="Portrait" loading="eager"
+             onerror="this.style.background='#111';this.removeAttribute('src');">
       </div>
 
-      <!-- IMAGE & TESSERACT VISUALS -->
-      <div class="hero-visuals">
-        <div class="profile-image-container">
-          <img src="1000006190.jpg" alt="Profile Picture">
-        </div>
-
-        <div class="tesseract-scene">
-          <div class="tesseract">
-            <div class="cube">
-              <div class="face front"></div><div class="face back"></div><div class="face right"></div>
-              <div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
-            </div>
-            <div class="cube inner">
-              <div class="face front"></div><div class="face back"></div><div class="face right"></div>
-              <div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
-            </div>
+      <div class="tesseract-scene" aria-hidden="true">
+        <div class="tesseract">
+          <div class="cube">
+            <div class="face front"></div><div class="face back"></div>
+            <div class="face right"></div><div class="face left"></div>
+            <div class="face top"></div><div class="face bottom"></div>
+          </div>
+          <div class="cube inner">
+            <div class="face front"></div><div class="face back"></div>
+            <div class="face right"></div><div class="face left"></div>
+            <div class="face top"></div><div class="face bottom"></div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ABOUT SECTION -->
-  <section id="about" class="page-section">
-    <h2 class="section-title">ABOUT ME</h2>
-    <p class="section-subtitle">Adapting rapidly to technology to deliver technical solutions.</p>
-    <div class="about-grid">
-      <div>
-        <p>I specialize in navigating and deploying emerging AI technologies. Rather than sticking to traditional tools, I continuously adapt my workflow to leverage state-of-the-art models for image generation, video creation, and API integration.</p>
-        <br>
-        <p>I am fluent in English, allowing clear technical communication with clients worldwide. My focus is always on high execution, combining creativity with functional software development.</p>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">$1,100+</div>
-        <p>Earned at age 16 through commercial AI content creation and video production workflows.</p>
-      </div>
+<!-- ================= ABOUT ================= -->
+<section id="about" class="page-section">
+  <h2 class="section-title">ABOUT ME</h2>
+  <p class="section-subtitle">Adapting rapidly to technology to deliver technical solutions.</p>
+
+  <div class="about-grid">
+    <div>
+      <p>I specialize in navigating and deploying emerging AI technologies. Rather than sticking to traditional tools, I continuously adapt my workflow to leverage state-of-the-art models for image generation, video creation, and API integration.</p>
+      <p>I am fluent in English, allowing clear technical communication with clients worldwide. My focus is always on high execution — combining creativity with functional software development.</p>
     </div>
-  </section>
-
-  <!-- SKILLS SECTION -->
-  <section id="skills" class="page-section">
-    <h2 class="section-title">CORE CAPABILITIES</h2>
-    <p class="section-subtitle">What I bring to the table.</p>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <h3>AI Image & Visual Design</h3>
-        <p>Crafting high-fidelity, production-ready AI images and commercial visual assets using custom generation workflows.</p>
-      </div>
-      <div class="skill-card">
-        <h3>AI-Assisted Video Production</h3>
-        <p>Scaling visual media production by combining video synthesis tools, automated editing, and content design.</p>
-      </div>
-      <div class="skill-card">
-        <h3>API & Chatbot Integration</h3>
-        <p>Building functional AI chatbots and seamlessly linking them to external APIs to automate complex tasks.</p>
-      </div>
-      <div class="skill-card">
-        <h3>Vibe Coding & Prototyping</h3>
-        <p>Leveraging modern AI-driven coding environments to design, iterate, and deploy web applications rapidly.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO SECTION -->
-  <section id="portfolio" class="page-section">
-    <h2 class="section-title">FEATURED WORK</h2>
-    <p class="section-subtitle">Click any project to view expanded media.</p>
-    <div class="portfolio-grid">
-      
-      <div class="portfolio-item" onclick='openModal(["1783679861331.png", "1783678867684.png", "1783669859616.png"])'>
-        <img src="1783679861331.png" alt="Generative Design Asset">
-        <div class="portfolio-overlay">
-          <h3>AI Digital Design Asset</h3>
-          <p>Generative Media Design</p>
-        </div>
-      </div>
-
-      <div class="portfolio-item" onclick='openModal(["1000006178.jpg", "1000006176.jpg"])'>
-        <img src="1000006178.jpg" alt="API Integration Concept">
-        <div class="portfolio-overlay">
-          <h3>API Connected Chatbot Concept</h3>
-          <p>AI Integration & Logic</p>
-        </div>
-      </div>
-
-      <div class="portfolio-item" onclick='openModal(["content.jpg"])'>
-        <img src="content.jpg" alt="Content AI Creation">
-        <div class="portfolio-overlay">
-          <h3>AI Content Creation AI Workflow</h3>
-          <p>Digital Video Production</p>
-        </div>
-      </div>
-
-      <div class="portfolio-item" onclick='openModal(["picture3.jpg", "1000006176.jpg"])'>
-        <img src="picture3.jpg" alt="Vibe Coding Prototype"> 
-        <div class="portfolio-overlay">
-          <h3>Rapid Prototype Interface</h3>
-          <p>Vibe Coding & Frontend</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- CONTACT SECTION -->
-  <section id="contact" class="page-section">
-    <h2 class="section-title">GET IN TOUCH</h2>
-    <p class="section-subtitle">Send an email directly or connect on social media.</p>
-    
-    <div class="contact-container">
-      <a href="mailto:leodavinciagent@gmail.com" class="social-card primary-contact">
-        <div>
-          <h3>Contact</h3>
-          <p>leodavinciagent@gmail.com</p>
-        </div>
-      </a>
-      <a href="https://www.linkedin.com/in/ron-empaci-705b703b4" target="_blank" class="social-card">
-        <div>
-          <h3>LinkedIn</h3>
-          <p>Connect professionally</p>
-        </div>
-      </a>
-      <a href="https://github.com/enolmsfrinder-glitch" target="_blank" class="social-card">
-        <div>
-          <h3>GitHub</h3>
-          <p>Explore code & tech builds</p>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- MULTI-MEDIA LIGHTBOX MODAL -->
-  <div id="modal" class="modal" onclick="closeModal(event)">
-    <span class="modal-close" onclick="closeModal(event)">&times;</span>
-    <div class="modal-content-wrapper" id="modal-wrapper">
-      <div id="media-container"></div>
-      <span class="modal-next" onclick="nextMedia(event)">&#10095;</span>
+    <div class="stat-card">
+      <div class="stat-number">$1,100+</div>
+      <p>Earned at age 16 through commercial AI content creation and video production workflows.</p>
     </div>
   </div>
+</section>
 
-  <!-- JAVASCRIPT -->
-  <script>
-    /* --- MOBILE MENU TOGGLE LOGIC --- */
-    function toggleMenu() {
-      document.querySelector('.nav-links').classList.toggle('nav-active');
-      document.querySelector('.hamburger').classList.toggle('active');
-    }
+<!-- ================= SKILLS ================= -->
+<section id="skills" class="page-section">
+  <h2 class="section-title">CORE CAPABILITIES</h2>
+  <p class="section-subtitle">What I bring to the table.</p>
 
-    /* --- TAB SWITCHING LOGIC (SPA) --- */
-    function switchTab(targetId) {
-      // 1. Hide all sections
-      const sections = document.querySelectorAll('.page-section');
-      sections.forEach(sec => sec.classList.remove('active-section'));
-      
-      // 2. Show the target section
-      document.getElementById(targetId).classList.add('active-section');
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3>AI Image &amp; Visual Design</h3>
+      <p>Crafting high-fidelity, production-ready AI images and commercial visual assets using custom generation workflows.</p>
+    </div>
+    <div class="skill-card">
+      <h3>AI-Assisted Video Production</h3>
+      <p>Scaling visual media production by combining video synthesis tools, automated editing, and content design.</p>
+    </div>
+    <div class="skill-card">
+      <h3>API &amp; Chatbot Integration</h3>
+      <p>Building functional AI chatbots and seamlessly linking them to external APIs to automate complex tasks.</p>
+    </div>
+    <div class="skill-card">
+      <h3>Vibe Coding &amp; Prototyping</h3>
+      <p>Leveraging modern AI-driven coding environments to design, iterate, and deploy web applications rapidly.</p>
+    </div>
+  </div>
+</section>
 
-      // 3. Update active state in Navigation
-      const navLinks = document.querySelectorAll('.nav-link');
-      navLinks.forEach(link => {
-        if(link.getAttribute('data-target') === targetId) {
-          link.classList.add('active-link');
-        } else {
-          link.classList.remove('active-link');
-        }
-      });
-      
-      // 4. Scroll to top of the new section
-      document.getElementById(targetId).scrollTop = 0;
+<!-- ================= PORTFOLIO ================= -->
+<section id="portfolio" class="page-section">
+  <h2 class="section-title">FEATURED WORK</h2>
+  <p class="section-subtitle">Click any project to view expanded media.</p>
 
-      // 5. Automatically close mobile menu after clicking a link
-      const navMenu = document.querySelector('.nav-links');
-      const hamburger = document.querySelector('.hamburger');
-      if (navMenu.classList.contains('nav-active')) {
-        navMenu.classList.remove('nav-active');
-        hamburger.classList.remove('active');
-      }
-    }
+  <div class="portfolio-grid" id="portfolio-grid">
+    <article class="portfolio-item" tabindex="0" role="button"
+             aria-label="View: AI Digital Design Asset"
+             data-media='["1783679861331.png","1783678867684.png","1783669859616.png"]'>
+      <img src="1783679861331.png" alt="Generative design asset" loading="lazy"
+           onerror="this.style.background='#0d0d0d';this.removeAttribute('src');">
+      <div class="portfolio-overlay">
+        <h3>AI Digital Design Asset</h3>
+        <p>Generative Media Design</p>
+      </div>
+    </article>
 
-    /* --- MULTI-MEDIA MODAL LOGIC --- */
-    let currentMediaArray = [];
-    let currentMediaIndex = 0;
+    <article class="portfolio-item" tabindex="0" role="button"
+             aria-label="View: API Connected Chatbot Concept"
+             data-media='["1000006178.jpg","1000006176.jpg"]'>
+      <img src="1000006178.jpg" alt="API integration concept" loading="lazy"
+           onerror="this.style.background='#0d0d0d';this.removeAttribute('src');">
+      <div class="portfolio-overlay">
+        <h3>API Connected Chatbot Concept</h3>
+        <p>AI Integration &amp; Logic</p>
+      </div>
+    </article>
 
-    function openModal(mediaArray) {
-      currentMediaArray = mediaArray;
-      currentMediaIndex = 0;
-      
-      const modal = document.getElementById('modal');
-      modal.style.display = 'flex';
-      
-      setTimeout(() => { modal.classList.add('show'); }, 10);
-      renderMedia();
-    }
+    <article class="portfolio-item" tabindex="0" role="button"
+             aria-label="View: AI Content Creation Workflow"
+             data-media='["content.jpg"]'>
+      <img src="content.jpg" alt="AI content workflow" loading="lazy"
+           onerror="this.style.background='#0d0d0d';this.removeAttribute('src');">
+      <div class="portfolio-overlay">
+        <h3>AI Content Creation Workflow</h3>
+        <p>Digital Video Production</p>
+      </div>
+    </article>
 
-    function renderMedia() {
-      const container = document.getElementById('media-container');
-      const file = currentMediaArray[currentMediaIndex];
-      
-      if (file.toLowerCase().endsWith('.mp4') || file.toLowerCase().endsWith('.webm')) {
-        container.innerHTML = `
-          <video controls autoplay loop muted style="max-width:100%; max-height:85vh; border-radius:8px;">
-            <source src="${file}" type="video/mp4">
-          </video>`;
-      } else {
-        container.innerHTML = `<img src="${file}" alt="Expanded View">`;
-      }
-    }
+    <article class="portfolio-item" tabindex="0" role="button"
+             aria-label="View: Rapid Prototype Interface"
+             data-media='["picture3.jpg","1000006176.jpg"]'>
+      <img src="picture3.jpg" alt="Rapid prototype interface" loading="lazy"
+           onerror="this.style.background='#0d0d0d';this.removeAttribute('src');">
+      <div class="portfolio-overlay">
+        <h3>Rapid Prototype Interface</h3>
+        <p>Vibe Coding &amp; Frontend</p>
+      </div>
+    </article>
+  </div>
+</section>
 
-    function nextMedia(event) {
-      event.stopPropagation();
-      currentMediaIndex = (currentMediaIndex + 1) % currentMediaArray.length;
-      renderMedia();
-    }
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="page-section">
+  <h2 class="section-title">GET IN TOUCH</h2>
+  <p class="section-subtitle">Send an email directly or connect on social media.</p>
 
-    function closeModal(event) {
-      if (event.target.id === 'modal' || event.target.className === 'modal-close') {
-        const modal = document.getElementById('modal');
-        modal.classList.remove('show');
-        
-        setTimeout(() => {
-          modal.style.display = 'none';
-          document.getElementById('media-container').innerHTML = ''; 
-        }, 300);
-      }
-    }
-  </script>
+  <div class="contact-container">
+    <a href="mailto:leodavinciagent@gmail.com" class="social-card primary-contact">
+      <div>
+        <h3>Contact</h3>
+        <p>leodavinciagent@gmail.com</p>
+      </div>
+    </a>
+    <a href="https://www.linkedin.com/in/ron-empaci-705b703b4" target="_blank" rel="noopener noreferrer" class="social-card">
+      <div>
+        <h3>LinkedIn</h3>
+        <p>Connect professionally</p>
+      </div>
+    </a>
+    <a href="https://github.com/enolmsfrinder-glitch" target="_blank" rel="noopener noreferrer" class="social-card">
+      <div>
+        <h3>GitHub</h3>
+        <p>Explore code &amp; tech builds</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ================= MODAL ================= -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-label="Media viewer">
+  <button class="modal-close" aria-label="Close viewer">&times;</button>
+  <button class="modal-nav modal-prev" aria-label="Previous media">&#10094;</button>
+  <div class="modal-content-wrapper" id="modal-wrapper">
+    <div id="media-container"></div>
+  </div>
+  <button class="modal-nav modal-next" aria-label="Next media">&#10095;</button>
+  <div class="modal-counter" id="modal-counter"></div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  /* ============================================================
+     MOBILE MENU
+     ============================================================ */
+  const hamburger = document.getElementById('hamburger');
+  const navMenu   = document.getElementById('nav-menu');
+
+  function setMenu(open){
+    navMenu.classList.toggle('nav-active', open);
+    hamburger.classList.toggle('active', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('menu-open', open);
+  }
+  function closeMenu(){ setMenu(false); }
+
+  hamburger.addEventListener('click', () => {
+    setMenu(!navMenu.classList.contains('nav-active'));
+  });
+
+  /* ============================================================
+     TAB SWITCHING
+     ============================================================ */
+  const sections = document.querySelectorAll('.page-section');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function switchTab(targetId){
+    const target = document.getElementById(targetId);
+    if (!target) return;
+
+    sections.forEach(s => s.classList.toggle('active-section', s.id === targetId));
+    navLinks.forEach(link =>
+      link.classList.toggle('active-link', link.dataset.target === targetId)
+    );
+
+    target.scrollTop = 0;
+    closeMenu();
+  }
+
+  // Event delegation: any [data-target] triggers tab switch
+  document.addEventListener('click', e => {
+    const trigger = e.target.closest('[data-target]');
+    if (trigger) switchTab(trigger.dataset.target);
+  });
+
+  /* ============================================================
+     MODAL
+     ============================================================ */
+  const modal     = document.getElementById('modal');
+  const container = document.getElementById('media-container');
+  const counter   = document.getElementById('modal-counter');
+  const btnPrev   = modal.querySelector('.modal-prev');
+  const btnNext   = modal.querySelector('.modal-next');
+  const btnClose  = modal.querySelector('.modal-close');
+
+  let mediaList = [];
+  let mediaIdx  = 0;
+  let lastFocus = null;
+
+  function isVideo(file){
+    return /\.(mp4|webm|mov|ogg)$/i.test(file);
+  }
+
+  function renderMedia(){
+    if (!mediaList.length) return;
+    const file = mediaList[mediaIdx];
+
+    container.innerHTML = isVideo(file)
+      ? `<video controls autoplay loop muted playsinline>
+           <source src="${file}" type="video/mp4">
+         </video>`
+      : `<img src="${file}" alt="Expanded view" onerror="this.style.background='#111';this.alt='Image unavailable';this.removeAttribute('src');">`;
+
+    // Counter + nav visibility
+    const multiple = mediaList.length > 1;
+    modal.classList.toggle('single', !multiple);
+    if (multiple) counter.textContent = `${mediaIdx + 1} / ${mediaList.length}`;
+  }
+
+  function openModal(media){
+    lastFocus = document.activeElement;
+    mediaList = media;
+    mediaIdx  = 0;
+
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    renderMedia();
+
+    requestAnimationFrame(() => modal.classList.add('show'));
+    btnClose.focus();
+  }
+
+  function closeModal(){
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    setTimeout(() => {
+      modal.style.display = 'none';
+      container.innerHTML = '';
+      mediaList = [];
+      mediaIdx  = 0;
+      if (lastFocus) lastFocus.focus();
+    }, 300);
+  }
+
+  function nextMedia(){
+    if (mediaList.length < 2) return;
+    mediaIdx = (mediaIdx + 1) % mediaList.length;
+    renderMedia();
+  }
+
+  function prevMedia(){
+    if (mediaList.length < 2) return;
+    mediaIdx = (mediaIdx - 1 + mediaList.length) % mediaList.length;
+    renderMedia();
+  }
+
+  /* Trigger via portfolio items (click + keyboard) */
+  const grid = document.getElementById('portfolio-grid');
+  grid.addEventListener('click', e => {
+    const item = e.target.closest('.portfolio-item');
+    if (!item) return;
+    openModal(JSON.parse(item.dataset.media));
+  });
+  grid.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const item = e.target.closest('.portfolio-item');
+    if (!item) return;
+    e.preventDefault();
+    openModal(JSON.parse(item.dataset.media));
+  });
+
+  /* Modal controls */
+  btnClose.addEventListener('click', closeModal);
+  btnNext.addEventListener('click', nextMedia);
+  btnPrev.addEventListener('click', prevMedia);
+
+  /* Click outside to close */
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+
+  /* Keyboard */
+  document.addEventListener('keydown', e => {
+    if (modal.style.display !== 'flex') return;
+    if (e.key === 'Escape')     closeModal();
+    if (e.key === 'ArrowRight') nextMedia();
+    if (e.key === 'ArrowLeft')  prevMedia();
+  });
+
+  /* Touch swipe */
+  let touchStartX = 0, touchStartY = 0;
+  modal.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  modal.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    const dy = e.changedTouches[0].screenY - touchStartY;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+    dx < 0 ? nextMedia() : prevMedia();
+  }, { passive: true });
+
+  /* ============================================================
+     HASH ROUTING (bonus: deep-link to sections)
+     ============================================================ */
+  function handleHash(){
+    const id = location.hash.replace('#', '');
+    if (id && document.getElementById(id)) switchTab(id);
+  }
+  window.addEventListener('hashchange', handleHash);
+
+  // Optional: keep hash in sync when switching tabs
+  const originalSwitch = switchTab;
+  switchTab = function(id){
+    originalSwitch(id);
+    if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+  };
+
+  handleHash();
+})();
+</script>
 </body>
 </html>
